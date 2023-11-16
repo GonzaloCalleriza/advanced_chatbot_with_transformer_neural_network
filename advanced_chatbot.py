@@ -65,3 +65,18 @@ def remove_contractions(sentence):
     sentence = re.sub(r"\'re", " are", sentence)
     sentence = re.sub(r"\'ve", " have", sentence)
     
+# Preprocess text data for Transformer chatbot ML
+def preprocess_text(data):
+    processed_data = []
+    for sentence in data:
+        cleaned = clean_text(sentence)
+        new_sentence = remove_contractions(cleaned)
+        
+        new_sentence = re.sub(r"[^a-zA-Z?.!,]+", " ", new_sentence)
+        stripped_sentence = new_sentence.strip()
+        processed_data.append(stripped_sentence)
+        
+    return processed_data
+
+cleaned_inputs = preprocess_text(inputs)
+cleaned_outputs = preprocess_text(outputs)
