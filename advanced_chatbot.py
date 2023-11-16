@@ -1,5 +1,6 @@
+import re
 
-
+# Process the data from the two text files
 def read_files():
     
     line_id_to_text = {}
@@ -37,3 +38,15 @@ def read_conversations():
     return inputs, outputs
 
 inputs, outputs = read_conversations()
+
+# Clean data for NLP
+def clean_text(sentence):
+    lowercase = sentence.lower()
+    stripped_whitespace = lowercase.strip()
+    
+    new_sentence = re.sub(r"([?.!,])", r"\1", stripped_whitespace)
+    new_sentence = re.sub(r'[" "]+', " ", new_sentence)
+    
+    return new_sentence
+
+# Removing contractions
