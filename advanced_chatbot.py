@@ -50,3 +50,18 @@ def clean_text(sentence):
     return new_sentence
 
 # Removing contractions
+
+def remove_contractions(sentence):
+    sentence = re.sub(r"we'd", "we would", sentence)
+    sentence = re.sub(r"that's", "that is", sentence)
+    sentence = re.sub(r"you're", "you are", sentence)
+    sentence = re.sub(r"what's", "what is", sentence)
+    sentence = re.sub(r"it's", "it is", sentence)
+    sentence = re.sub(r"didn't", "did not", sentence)
+    sentence = re.sub(r"i'm", "i am", sentence)
+    sentence = re.sub(r"can't", "can not", sentence)
+    sentence = re.sub(r"\'d", " would", sentence)
+    sentence = re.sub(r"\'ll", " will", sentence)
+    sentence = re.sub(r"\'re", " are", sentence)
+    sentence = re.sub(r"\'ve", " have", sentence)
+    
