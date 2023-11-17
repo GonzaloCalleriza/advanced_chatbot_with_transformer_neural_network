@@ -1,4 +1,5 @@
 import re
+import tensorflow_datasets as tfds
 
 # Process the data from the two text files
 def read_files():
@@ -80,3 +81,10 @@ def preprocess_text(data):
 
 cleaned_inputs = preprocess_text(inputs)
 cleaned_outputs = preprocess_text(outputs)
+
+# Build a tokenizer with tfds
+
+tokenizer = tfds.deprecated.text.SubwordTextEncoder.build_from_corpus(
+    cleaned_inputs + cleaned_outputs,
+    target_vocab_size = 2**10
+)
