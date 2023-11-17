@@ -116,3 +116,16 @@ padded_inputs = tf.keras.preprocessing.sequence.pad_sequences(
 padded_outputs = tf.keras.preprocessing.sequence.pad_sequences(
     tokenized_outputs, padding="post"
 )
+
+# Build TensorFlow Dataset for ML
+data = tf.data.Dataset.from_tensor_slices(
+    (
+        {"inputs": padded_inputs, "dec_inputs": padded_outputs[:, :-1]},
+        {"outputs": padded_outputs[:, 1:]}
+    )
+)
+
+data = data.cache()
+data = data.shuffle(10_000)
+data = data.batch(32)
+data = data.prefetch(tf.data.AUTOTUNE)
