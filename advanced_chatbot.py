@@ -112,3 +112,7 @@ tokenized_inputs, tokenized_outputs = tokenize(cleaned_inputs, cleaned_outputs)
 padded_inputs = tf.keras.preprocessing.sequence.pad_sequences(
     tokenized_inputs, padding="post"
 )
+
+padded_outputs = tf.keras.preprocessing.sequence.pad_sequences(
+    tokenized_outputs, padding="post"
+)
