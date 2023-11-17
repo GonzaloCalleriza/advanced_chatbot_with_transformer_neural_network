@@ -1,5 +1,6 @@
 import re
 import tensorflow_datasets as tfds
+import tensorflow as tf
 
 # Process the data from the two text files
 def read_files():
@@ -104,3 +105,10 @@ def tokenize(inputs, outputs):
         tokenized_outputs.append(answer)
     
     return tokenized_inputs, tokenized_outputs
+
+tokenized_inputs, tokenized_outputs = tokenize(cleaned_inputs, cleaned_outputs)
+
+# Adding padding to tokenized sentences with Python
+padded_inputs = tf.keras.preprocessing.sequence.pad_sequences(
+    tokenized_inputs, padding="post"
+)
