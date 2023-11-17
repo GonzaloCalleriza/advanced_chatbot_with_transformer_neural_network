@@ -88,3 +88,19 @@ tokenizer = tfds.deprecated.text.SubwordTextEncoder.build_from_corpus(
     cleaned_inputs + cleaned_outputs,
     target_vocab_size = 2**10
 )
+
+start_token = [tokenizer.vocab_size]
+end_token = [tokenizer.vocab_size + 1]
+
+def tokenize(inputs, outputs):
+    
+    tokenized_inputs, tokenized_outputs = [], []
+    
+    for(question, answer) in zip(inputs, outputs):
+        question = start_token + tokenizer.encode(question) + end_token
+        answer   = start_token + tokenizer.encode(answer)   + end_token
+        
+        tokenized_inputs.append(question)
+        tokenized_outputs.append(answer)
+    
+    return tokenized_inputs, tokenized_outputs
